@@ -1,0 +1,31 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Заявка отправлена - KLI Group{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Заявка успешно отправлена!</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'img/order-success.png' %}" alt="Заявка принята" class="img-fluid" style="max-width: 150px;">
+                    </div>
+                    
+                    <h4 class="text-center mb-4">Благодарим за ваш заказ!</h4>
+                    
+                    <p class="text-center">Ваша заявка №{{ order.id }} принята в обработку.</p>
+                    <p class="text-center">Наш менеджер свяжется с вами в ближайшее время по указанному номеру телефона {{ order.phone }} для уточнения деталей.</p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="{% url 'index' %}" class="btn btn-primary">Вернуться на главную</a>
+                        <a href="{% url 'product_list' %}" class="btn btn-outline-primary ml-2">Продолжить покупки</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}KLI Group - Водопонижение грунтовых вод{% endblock %}
+
+{% block content %}
+    <!-- Hero Banner -->
+    <section class="hero-banner mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="banner-container position-relative">
+                    <img src="{% static 'img/banner.jpg' %}" alt="Водопонижение грунтовых вод" class="img-fluid w-100">
+                    <div class="banner-text position-absolute text-white p-4">
+                        <h1 class="banner-title mb-3">Водопонижение на 100%</h1>
+                        <h2 class="banner-subtitle">СУХО, КАК В ПУСТЫНЕ!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products mb-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title mb-4">Наши товары и услуги</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for product in products %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="product-card card h-100">
+                        <div class="product-img-container">
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top product-img" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'img/no-image.png' %}" class="card-img-top product-img" alt="Нет изображения">
+                            {% endif %}
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title product-title">{{ product.name }}</h5>
+                            <p class="card-text product-price text-primary font-weight-bold mb-3">{{ product.price }} ₸</p>
+                            <div class="mt-auto">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary btn-sm mr-2">Подробнее</a>
+                                <form action="{% url 'cart_add' product.id %}" method="post" class="d-inline add-to-cart-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-sm">В корзину</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <p class="text-center">Нет доступных товаров.</p>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{% url 'product_list' %}" class="btn btn-outline-primary">Смотреть все товары и услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Summary -->
+    <section class="about-summary mb-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title mb-4">О нашей компании</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <p>Компания KLI Group специализируется на водопонижении грунтовых вод с помощью иглофильтров, а также выполняет работы по асфальтированию и благоустройству территорий.</p>
+                <p>Наш многолетний опыт и профессиональный подход гарантируют высокое качество выполняемых работ.</p>
+                <a href="{% url 'about' %}" class="btn btn-outline-primary">Подробнее о нас</a>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/about.jpg' %}" alt="О компании KLI Group" class="img-fluid rounded">
+            </div>
+        </div>
+    </section>
+{% endblock %}

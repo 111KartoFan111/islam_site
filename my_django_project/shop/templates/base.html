@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}KLI Group - Водопонижение грунтовых вод{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <!-- Logo -->
+                <div class="col-md-3 col-sm-12 text-center text-md-left mb-3 mb-md-0">
+                    <a href="{% url 'index' %}" class="logo">
+                        <img src="{% static 'img/logo.png' %}" alt="KLI Group" class="img-fluid">
+                    </a>
+                </div>
+                
+                <!-- Header text -->
+                <div class="col-md-5 col-sm-12 text-center text-md-left mb-3 mb-md-0">
+                    <div class="header-text">
+                        <h4 class="text-uppercase mb-0">Водопонижение грунтовых вод</h4>
+                        <p class="text-muted mb-0">Иглофильтрами, асфальтирование и благоустройство</p>
+                    </div>
+                </div>
+                
+                <!-- Contact phones -->
+                <div class="col-md-4 col-sm-12 text-center text-md-right">
+                    <div class="header-phones">
+                        <a href="tel:+77075030770" class="phone-link d-block mb-2">+7 (707) 503-07-70</a>
+                        <a href="tel:+77172269062" class="phone-link d-block">+7 (717) 226-90-62</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="main-nav bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'index' %}">ГЛАВНАЯ</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle {% if '/products/' in request.path %}active{% endif %}" 
+                                   href="{% url 'product_list' %}" id="navbarDropdown" role="button" 
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ТОВАРЫ И УСЛУГИ
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{% url 'product_list' %}">Все товары и услуги</a>
+                                    <div class="dropdown-divider"></div>
+                                    {% for category in categories %}
+                                        <a class="dropdown-item" href="{% url 'product_list_by_category' category.slug %}">{{ category.name }}</a>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about' %}">О НАС</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if request.path == '/contacts/' %}active{% endif %}" href="{% url 'contacts' %}">КОНТАКТЫ</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Search form -->
+                <div class="search-box float-right">
+                    <form method="get" action="{% url 'product_list' %}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Поиск по магазину">
+                            <div class="input-group-append">
+                                <button class="btn btn-warning" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart indicator -->
+    <div class="cart-indicator">
+        <a href="{% url 'cart_detail' %}" class="cart-link">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-count">{{ cart|length }}</span>
+        </a>
+    </div>
+
+    <!-- Main content -->
+    <main class="site-content py-4">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Company info -->
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>О компании</h5>
+                    <p>KLI Group предоставляет услуги по водопонижению грунтовых вод, асфальтированию и благоустройству территорий.</p>
+                </div>
+                
+                <!-- Working hours -->
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>График работы</h5>
+                    <ul class="list-unstyled">
+                        <li>Понедельник - Пятница: 09:00 - 18:00</li>
+                        <li>Суббота: 09:00 - 16:00</li>
+                        <li>Воскресенье: Выходной</li>
+                    </ul>
+                </div>
+                
+                <!-- Contact info -->
+                <div class="col-md-4">
+                    <h5>Контакты</h5>
+                    <address>
+                        <p>проспект Кабанбай батыра, 19, Астана, Казахстан</p>
+                        <p>Телефон: <a href="tel:+77075030770" class="text-white">+7 (707) 503-07-70</a></p>
+                        <p>Email: <a href="mailto:info@kligroup.kz" class="text-white">info@kligroup.kz</a></p>
+                    </address>
+                </div>
+            </div>
+            
+            <hr class="bg-secondary">
+            
+            <!-- Copyright -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">© {% now "Y" %} KLI Group. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,106 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Контакты - KLI Group{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-title mb-4">Контакты</h1>
+        </div>
+    </div>
+    
+    <div class="row">
+        <!-- Contact information -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Наши контакты</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="contact-section-title">Компания:</h5>
+                    <p class="mb-4">KLI Group (Korund International Group)</p>
+                    
+                    <h5 class="contact-section-title">Адрес:</h5>
+                    <p class="mb-4">проспект Кабанбай батыра, 19, Астана, Казахстан</p>
+                    
+                    <h5 class="contact-section-title">Телефоны:</h5>
+                    <p class="mb-2"><a href="tel:+77075030770">+7 (707) 503-07-70</a></p>
+                    <p class="mb-4"><a href="tel:+77172269062">+7 (717) 226-90-62</a></p>
+                    
+                    <h5 class="contact-section-title">Email:</h5>
+                    <p class="mb-4"><a href="mailto:info@kligroup.kz">info@kligroup.kz</a></p>
+                    
+                    <h5 class="contact-section-title">WhatsApp:</h5>
+                    <p class="mb-4"><a href="https://wa.me/77075030770">+7 707 503 07 70</a></p>
+                    
+                    <h5 class="contact-section-title">Другие виды связи:</h5>
+                    <p class="mb-0">Email: <a href="mailto:info@korund-int.kz">info@korund-int.kz</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Working hours -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">График работы</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Понедельник</td>
+                                <td>09:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>Вторник</td>
+                                <td>09:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>Среда</td>
+                                <td>09:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>Четверг</td>
+                                <td>09:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>Пятница</td>
+                                <td>09:00 - 18:00</td>
+                            </tr>
+                            <tr>
+                                <td>Суббота</td>
+                                <td>09:00 - 16:00</td>
+                            </tr>
+                            <tr>
+                                <td>Воскресенье</td>
+                                <td>Выходной</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="alert alert-info mt-4">
+                        <p class="mb-0"><strong>Примечание:</strong> В праздничные дни график работы может меняться. Пожалуйста, уточняйте информацию по телефону.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Map -->
+    <div class="row mt-2">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Мы на карте</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2504.4398299785725!2d71.4140323!3d51.1250372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585a605525463%3A0x4dff4a6d5473d22!2z0L_RgNC-0YHQv9C10LrRgiDQmtCw0LHQsNC90LHQsNC5INCx0LDRgtGL0YDQsCAxOSwg0JDRgdGC0LDQvdCw!5e0!3m2!1sru!2skz!4v1649319422015!5m2!1sru!2skz" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

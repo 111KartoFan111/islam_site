@@ -1,0 +1,106 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }} - KLI Group{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}">Товары и услуги</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list_by_category' product.category.slug %}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Product image -->
+        <div class="col-md-5 mb-4">
+            <div class="product-image-container">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid rounded product-detail-img" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'img/no-image.png' %}" class="img-fluid rounded product-detail-img" alt="Нет изображения">
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Product info -->
+        <div class="col-md-7">
+            <div class="product-info">
+                <h1 class="product-title mb-3">{{ product.name }}</h1>
+                <p class="product-category text-muted mb-3">Категория: {{ product.category.name }}</p>
+                <div class="product-price-container mb-4">
+                    <span class="product-price-label">Цена:</span>
+                    <span class="product-price">{{ product.price }} ₸</span>
+                </div>
+                
+                <!-- Add to cart form -->
+                <form action="{% url 'cart_add' product.id %}" method="post" class="mb-4">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                </form>
+                
+                <!-- Contact info -->
+                <div class="product-contact-info">
+                    <h5>По вопросам приобретения:</h5>
+                    <p class="mb-1"><i class="fa fa-phone"></i> +7 (707) 503-07-70</p>
+                    <p><i class="fa fa-envelope"></i> info@kligroup.kz</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product description -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Описание</h5>
+                </div>
+                <div class="card-body">
+                    <div class="product-description">
+                        {{ product.description|linebreaks }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related products -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="related-products-title mb-4">Похожие товары</h3>
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for p in product.category.products.all|slice:":3" %}
+            {% if p.id != product.id %}
+                <div class="col-md-4 mb-4">
+                    <div class="product-card card h-100">
+                        <div class="product-img-container">
+                            {% if p.image %}
+                                <img src="{{ p.image.url }}" class="card-img-top product-img" alt="{{ p.name }}">
+                            {% else %}
+                                <img src="{% static 'img/no-image.png' %}" class="card-img-top product-img" alt="Нет изображения">
+                            {% endif %}
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title product-title">{{ p.name }}</h5>
+                            <p class="card-text product-price text-primary font-weight-bold mb-3">{{ p.price }} ₸</p>
+                            <div class="mt-auto">
+                                <a href="{% url 'product_detail' p.id p.slug %}" class="btn btn-outline-primary btn-sm mr-2">Подробнее</a>
+                                <form action="{% url 'cart_add' p.id %}" method="post" class="d-inline add-to-cart-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-sm">В корзину</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
