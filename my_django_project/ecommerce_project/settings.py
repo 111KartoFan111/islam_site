@@ -39,7 +39,7 @@ ROOT_URLCONF = 'ecommerce_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'shop/templates/shop')],  # Add this path
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -47,8 +47,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'shop.context_processors.categories',  # Make categories available in all templates
-                'shop.context_processors.cart',  # Make cart available in all templates
+                'shop.context_processors.categories',
+                'shop.context_processors.cart',
             ],
         },
     },
