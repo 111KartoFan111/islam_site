@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="banner-container position-relative">
-                    <img src="{% static 'img/banner.jpg' %}" alt="Водопонижение грунтовых вод" class="img-fluid w-100">
+                    <img src="../../../static/img/banner.png" alt="Водопонижение грунтовых вод" class="img-fluid w-100">
                     <div class="banner-text position-absolute text-white p-4">
                         <h1 class="banner-title mb-3">Водопонижение на 100%</h1>
                         <h2 class="banner-subtitle">СУХО, КАК В ПУСТЫНЕ!</h2>
@@ -26,7 +26,6 @@
                 <h2 class="section-title mb-4">Наши товары и услуги</h2>
             </div>
         </div>
-        
         <div class="row">
             {% for product in products %}
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -72,15 +71,11 @@
                 <h2 class="section-title mb-4">О нашей компании</h2>
             </div>
         </div>
-        
         <div class="row">
             <div class="col-md-6 mb-4 mb-md-0">
                 <p>Компания KLI Group специализируется на водопонижении грунтовых вод с помощью иглофильтров, а также выполняет работы по асфальтированию и благоустройству территорий.</p>
                 <p>Наш многолетний опыт и профессиональный подход гарантируют высокое качество выполняемых работ.</p>
                 <a href="{% url 'about' %}" class="btn btn-outline-primary">Подробнее о нас</a>
-            </div>
-            <div class="col-md-6">
-                <img src="{% static 'img/about.jpg' %}" alt="О компании KLI Group" class="img-fluid rounded">
             </div>
         </div>
     </section>
